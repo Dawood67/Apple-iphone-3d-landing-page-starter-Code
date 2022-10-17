@@ -1,6 +1,6 @@
-import MainHero from "./section/hero section/hero";
-import PhoneModel from "./section/phone model section/phone";
-import Quote from "./section/quote section/quote";
+import MainHero from "./section/heroSection/hero";
+import PhoneModel from "./section/phoneModelSection/phone";
+import Quote from "./section/quoteSection/quote";
 import { GlobalStyle } from "./styles/globalStyles";
 
 
