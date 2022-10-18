@@ -11,23 +11,23 @@ import { useGLTF } from '@react-three/drei'
 import gsap from 'gsap'
 import { useThree } from '@react-three/fiber'
 
-export function Model(props) {
+export function Model2(props) {
   const { nodes, materials } = useGLTF('/scene.gltf')
 
-  let camera = useThree(state => state.camera)
+  let camera = useThree(state => state.camera);
+  let scene = useThree(state => state.scene);
+
+
 
   useLayoutEffect(() => {
-  // gsap.to(camera.position, {x:-1, y:0.5})
-  let t1 = gsap.timeline({
-    scrollTrigger:{
-      trigger:"#phone-model",
-      start:"top top",
-      end:"bottom+=500 bottom",
-      // markers:true,
-    }
-  })
+    camera.position.set(-0.2,.4,5)
+    materials.Body.color.set("#9BB5CE");
+ 
+ 
 
-  t1.fromTo(camera.position, {y:2}, {y:0})
+
+
+
  
 
 
