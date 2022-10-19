@@ -67,4 +67,19 @@ export const Text = styled.p`
     font-family: var(--fontR);
   }
 
+  @media screen and (max-width: 70em) {
+    width: 70%;
+  }
+  @media screen and (max-width: 48em) {
+    font-size: var(--fontmd);
+    height: var(--fontsm);
+  }
+  @media screen and (max-width: 40em) {
+    width: 90%;
+  }
+  @media screen and (max-width: 30em) {
+    font-size: var(--fontxs);
+  }
+
+
 `

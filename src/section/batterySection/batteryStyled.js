@@ -23,6 +23,20 @@ top: 50%;
 transform: translate(-50%, -50%);
 text-transform: uppercase;
 z-index: 1;
+
+@media screen and (max-width: 70em) {
+    font-size: var(--fontxxxl);
+  }
+  @media screen and (max-width: 64em) {
+    font-size: var(--fontxxl);
+  }
+  @media screen and (max-width: 48em) {
+    font-size: var(--fontlg);
+    transform: none;
+    left: 2rem;
+    top: 2rem;
+    width: 50%;
+  }
 `
 
 export const Batterys = styled.ul`
@@ -49,5 +63,11 @@ li
 {
     margin: 0.5rem 0;
 }
+
+@media screen and (max-width: 48em) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
 `

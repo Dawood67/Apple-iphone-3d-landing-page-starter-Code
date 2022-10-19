@@ -10,7 +10,7 @@ import React, { useRef, useLayoutEffect } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 
-export  function Model2({ ...props }) {
+export  function Model3({ ...props }) {
   const group = useRef();
   const { nodes, materials } = useGLTF("/scene.gltf");
 
@@ -19,6 +19,11 @@ export  function Model2({ ...props }) {
   useLayoutEffect(() => {
     camera.position.set(-0.1,0.4,5);
     materials.Body.color.set("#9BB5CE");
+
+    if(window.matchMedia("(max-width:48em)").matches){
+      camera.fov = 18;
+      camera.updateProjectionMatrix();
+    }
         
   }, []);
 

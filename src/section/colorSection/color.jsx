@@ -1,6 +1,6 @@
 import { rgb } from "@react-spring/shared";
 import gsap from "gsap";
-import React from "react";
+import React, { useEffect } from "react";
 import { useLayoutEffect } from "react";
 import { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
@@ -9,6 +9,8 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Environment } from '@react-three/drei';
 import { Model2 } from "../../components/Scene2";
 import { Center, ColorWrapper, Left, Right } from "./colorStyled";
+import { useContext } from "react";
+import { ColorContext } from "../../context/colorContext";
 
 
 const Color = () => {
@@ -18,20 +20,47 @@ const Color = () => {
   const textRef = useRef(null);
 
   const { materials } = useGLTF("/scene.gltf");
+  const {currentColor,changeColorContext} = useContext(ColorContext);
 
-  useLayoutEffect(() => {
-    let Elem = sectionRef.current;
+  useEffect(() => {
     let leftElem = leftRef.current;
     let rightElem = rightRef.current;
     let textElem = textRef.current;
 
-    let updateColor = (color, text, rgbColor) => {
-      materials.Body.color.set(color);
-      textElem.innerText = text;
-      textElem.style.color = color;
+    textElem.innerText = currentColor.text;
+    textElem.style.color = currentColor.color;
 
-      rightElem.style.backgroundColor = `rgba(${rgbColor}, 0.4)`;
-      leftElem.style.backgroundColor = `rgba(${rgbColor}, 0.8)`;
+    rightElem.style.backgroundColor = `rgba(${currentColor.rgbColor}, 0.4)`;
+    leftElem.style.backgroundColor = `rgba(${currentColor.rgbColor}, 0.8)`;
+
+  }, [currentColor])
+  
+
+  useLayoutEffect(() => {
+    let Elem = sectionRef.current;
+    // let leftElem = leftRef.current;
+    // let rightElem = rightRef.current;
+    // let textElem = textRef.current;
+
+    let updateColor = (color, text, rgbColor) => {
+
+      const colorObj = {
+        color,
+        text,
+        rgbColor
+      }
+
+      changeColorContext(colorObj)
+
+
+      // materials.Body.color.set(color);
+
+
+      // textElem.innerText = currentColor.text;
+      // textElem.style.color = currentColor.color;
+
+      // rightElem.style.backgroundColor = `rgba(${currentColor.rgbColor}, 0.4)`;
+      // leftElem.style.backgroundColor = `rgba(${currentColor.rgbColor}, 0.8)`;
     };
 
     gsap.to(Elem, {

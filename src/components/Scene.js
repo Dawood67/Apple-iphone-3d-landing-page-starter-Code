@@ -22,7 +22,31 @@ export function Model(props) {
   useLayoutEffect(() => {
     camera.position.set(0,2,6)
     materials.Body.color.set("#9BB5CE");
+
+let fov = camera.fov;
+fov = (1400 * 18)/ window.innerWidth;
+camera.fov = fov;
+camera.updateProjectionMatrix();
+
+
+
   // gsap.to(camera.position, {x:-1, y:0.5})
+
+
+  let mm = gsap.matchMedia(),
+    breakPoint = 800;
+
+mm.add({
+
+  // set up any number of arbitrarily-named conditions. The function below will be called when ANY of them match.
+  isDesktop: `(min-width: 48em)`,
+  isMobile: `(max-width: 48em)`,
+ 
+
+}, (context) => {
+
+  // context.conditions has a boolean property for each condition defined above indicating if it's matched or not.
+  let { isDesktop, isMobile } = context.conditions;
   let t1 = gsap.timeline({
     scrollTrigger:{
       trigger:"#phone-model",
@@ -32,7 +56,7 @@ export function Model(props) {
       scrub:true,
       // markers:true,
     }
-  })
+  });
 
   t1.fromTo(camera.position, {y:2}, {y:0})
   .to(scene.rotation,{y:0.8})
@@ -40,9 +64,34 @@ export function Model(props) {
   .to(scene.rotation,{z:1.58}, "key1")
   .to(camera.position,{z:4}, "key1")
   .to(scene.rotation,{y:0, z:0}, "key2")
-  .to(camera.position,{z:6, x:-1}, "key2")
+  .to(camera.position,{z:6, x: isDesktop? -1 : 0}, "key2")
   .to(scene.rotation,{z:0, y:6.3}, "key3")
-  .to(camera.position,{x:0.8,y:0}, "key3")
+  .to(camera.position,{x: isDesktop? 0.8 : 0,y:0}, "key3")
+
+  if(isMobile)
+  {
+    camera.fov = 20;
+camera.updateProjectionMatrix();
+
+  }
+
+
+  return () => { 
+    // optionally return a cleanup function that will be called when none of the conditions match anymore (after having matched)
+    // it'll automatically call context.revert() - do NOT do that here . Only put custom cleanup code here.
+    if(t1) t1.kill();
+  }
+}); 
+
+  // t1.fromTo(camera.position, {y:2}, {y:0})
+  // .to(scene.rotation,{y:0.8})
+  // .to(scene.rotation,{y:3})
+  // .to(scene.rotation,{z:1.58}, "key1")
+  // .to(camera.position,{z:4}, "key1")
+  // .to(scene.rotation,{y:0, z:0}, "key2")
+  // .to(camera.position,{z:6, x:-1}, "key2")
+  // .to(scene.rotation,{z:0, y:6.3}, "key3")
+  // .to(camera.position,{x:0.8,y:0}, "key3")
 
 
  

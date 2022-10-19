@@ -35,13 +35,29 @@ span
 
 }
 
+@media screen and (max-width: 70em) {
+    span {
+      font-size: var(--fontxxxl);
+    }
+  }
+  @media screen and (max-width: 64em) {
+    span {
+      font-size: var(--fontxxl);
+    }
+  }
+  @media screen and (max-width: 48em) {
+    span {
+      font-size: var(--fontlg);
+    }
+  }
+
 
 `
 
 export const TextContainer2 = styled.div`
 width: 100%;
 min-height: 50vh;
-z-index: 1;
+/* z-index: 1; */
 
 display: flex;
 justify-content: center;
@@ -55,8 +71,26 @@ span
     text-transform: capitalize;
     font-weight: 600;
     width: 80%;
+    align-self: flex-end;
+    
 
 }
+
+@media screen and (max-width: 70em) {
+    span {
+      font-size: var(--fontxxl);
+    }
+  }
+  @media screen and (max-width: 64em) {
+    span {
+      font-size: var(--fontxl);
+    }
+  }
+  @media screen and (max-width: 48em) {
+    span {
+      font-size: var(--fontlg);
+    }
+  }
 
 
 `
